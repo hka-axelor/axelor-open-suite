@@ -799,6 +799,16 @@
     <domain>self.type = 2</domain>
   </action-view>
 
+  <menuitem title="Customer invoice analysis"
+    name="menu-account-sale-invoice-advance-analysis" parent="menu-account-invoice-advanced"
+    action="menu.account.sale.invoice.advance.analysis"/>
+
+  <action-view name="menu.account.sale.invoice.advance.analysis"
+    title="Customer invoice analysis" model="com.axelor.apps.account.db.InvoiceAnalysis">
+    <view type="grid" name="invoice-analysis-grid"/>
+    <view type="form" name="invoice-analysis-form"/>
+  </action-view>
+
 
   <menuitem name="menu-accounting-dashboard-1" parent="account-root-report"
     title="Accounting" action="accounting.dashboard.view"/>
