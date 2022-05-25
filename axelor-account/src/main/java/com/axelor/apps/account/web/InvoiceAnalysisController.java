@@ -38,16 +38,28 @@ public class InvoiceAnalysisController {
         BigDecimal minSupport = invoiceAnalysis.getMinSupport();
         BigDecimal minConfidence = invoiceAnalysis.getMinConfidence();
 
-        //        String command = "python /home/axelor/Downloads/test.py";
-        String command =
-            "python /home/axelor/Projects/aos-master/axelor-erp/modules/axelor-open-suite/axelor-account/src/main/resources/python/test.py ";
-        Process p = Runtime.getRuntime().exec(command);
+        //        String command =
+        //            "python
+        // /home/axelor/Projects/aos-master/axelor-erp/modules/axelor-open-suite/axelor-account/src/main/resources/python/test.py ";
+
+        String pathToFile = csvFile.getAbsolutePath();
+
+        String[] cmd = {
+          "python",
+          "/home/axelor/Projects/aos-master/axelor-erp/modules/axelor-open-suite/axelor-account/src/main/resources/python/test.py",
+          pathToFile,
+          minSupport.toString(),
+          minConfidence.toString()
+        };
+
+        Process p = Runtime.getRuntime().exec(cmd);
         BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        String line = in.readLine();
-        while (in.readLine() != null) {
-          line += in.readLine() + "\n";
+        String line;
+        String result = "";
+        while ((line = in.readLine()) != null) {
+          result += line + "\n";
         }
-        response.setValue("analysisResult", line);
+        response.setValue("analysisResult", result);
       }
 
     } catch (Exception e) {
