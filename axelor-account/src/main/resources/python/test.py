@@ -26,6 +26,7 @@ for i in range(0, store_data.shape[0]):
 association_rules = apriori(records, min_support= support, min_confidence= confidence, min_lift=3, min_length=2)
 association_results = list(association_rules)
 
+rules = []
 for item in association_results:
 
     # first index of the inner list
@@ -35,6 +36,11 @@ for item in association_results:
     if items[0] == 'nan' or items[1] == 'nan':
       continue
     
+    rule = items[0] + " -> " + items[1]
+    if rule in rules:
+    	continue
+    
+    rules.append(rule)	
     print("Rule: " + items[0] + " -> " + items[1])
 
     #second index of the inner list
